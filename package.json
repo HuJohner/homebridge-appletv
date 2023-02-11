@@ -1,5 +1,4 @@
 {
-  "private": true,
   "displayName": "Homebridge AppleTV",
   "name": "homebridge-appletv",
   "version": "1.0.0",
