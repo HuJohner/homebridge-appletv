@@ -25,7 +25,6 @@ Configuration can be done using [Homebridge Config UI X](https://github.com/oznu
 ```yaml
 {
     "platform": "AppleTV",
-    "name": "Apple TV",
     "devices": [
         {
             "name": "Living Room",
