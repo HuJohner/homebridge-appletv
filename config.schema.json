@@ -1,15 +1,57 @@
 {
-  "pluginAlias": "ExampleHomebridgePlugin",
+  "pluginAlias": "AppleTV",
   "pluginType": "platform",
   "singular": true,
   "schema": {
     "type": "object",
     "properties": {
-      "name": {
-        "title": "Name",
-        "type": "string",
-        "required": true,
-        "default": "Example Dynamic Platform"
+      "devices": {
+        "type": "array",
+        "title": "Devices",
+        "items": {
+          "title": "Device",
+          "type": "object",
+          "properties": {
+            "name": {
+              "title": "Name",
+              "description": "The name of the Apple TV",
+              "type": "string",
+              "required": true,
+              "placeholder": "Name"
+            },            
+            "host": {
+              "title": "IP",
+              "description": "The IP of the device",
+              "type": "string",
+              "required": true,
+              "placeholder": "192.168.0.2"
+            },
+            "credentials": {
+              "title": "Credentials",
+              "description": "The credentials needed to authorise connection to the device",
+              "type": "string",
+              "required": true
+            },
+            "device_state_sensors": {
+              "title": "Device State Sensors",
+              "description": "Enables a \"motion sensor\" for detecting device states",
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "idle",
+                  "loading",
+                  "paused",
+                  "playing",
+                  "seeking",
+                  "stopped"
+                ]
+              },
+              "default": ["idle", "paused", "playing"]
+            }
+          }
+        }
       }
     }
   }
