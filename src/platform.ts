@@ -39,6 +39,7 @@ export class AppleTVPlatform implements DynamicPlatformPlugin {
   }
 
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   setupAccessory(device: any) {
     const uuid = this.api.hap.uuid.generate(device.name);
 
