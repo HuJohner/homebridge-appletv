@@ -49,6 +49,35 @@
                 ]
               },
               "default": ["idle", "paused", "playing"]
+            },
+            "app_sensors": {
+              "type": "array",
+              "title": "Application Sensors",
+              "description": "Enables a \"motion sensor\" for detecting app in use",
+              "items": {
+                "title": "App",
+                "type": "string"
+              }
+            },
+            "generic_sensors": {
+              "type": "array",
+              "title": "Generic Sensors",
+              "description": "Enables a \"motion sensor\" for detecting any state",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "property": {
+                    "type": "string"
+                  },
+                  "values": {
+                    "type": "array",
+                    "items": {
+                      "title": "value",
+                      "type": "string"
+                    }
+                  }
+                }
+              }
             }
           }
         }

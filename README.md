@@ -34,6 +34,27 @@ Configuration can be done using [Homebridge Config UI X](https://github.com/oznu
                 "idle",
                 "paused",
                 "playing"
+            ],
+            "app_sensors": [
+                "Netflix",
+                "Disney+"
+            ],
+            "generic_sensors": [
+                {
+                    "property": "mediaType",
+                    "values": [
+                        "music",
+                        "tv",
+                        "video",
+                        "unknown"
+                    ]
+                },
+                {
+                    "property": "genre",
+                    "values": [
+                        "Pop"
+                    ]
+                }
             ]
         }
     ]
@@ -47,6 +68,8 @@ Configuration can be done using [Homebridge Config UI X](https://github.com/oznu
   * **host**: The IP of the device.
   * **credentials**: The credentials needed to authorise connection to the device.
   * **device_state_sensors** [*optional*]: Enables a "motion sensor" for detecting device states. Possible values: "idle", "loading", "paused", "playing", "seeking", "stopped"
+  * **app_sensors** [*optional*]: Enables a "motion sensor" for detecting current appin use.
+  * **generic_sensors** [*optional*]: Enables a "motion sensor" for detecting generic states.
 
 ## Retrieving credentials
 
