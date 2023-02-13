@@ -77,7 +77,6 @@ export class AppleTVAccessory {
         if (event instanceof Error) {
           return;
         }
-        this.platform.log.debug(`update:${property} `, event);
         for (const value in this.genericServices[property]) {
           this.genericServices[property][value].setCharacteristic(this.platform.Characteristic.MotionDetected, event.newValue === value);
         }
