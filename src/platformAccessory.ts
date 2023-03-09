@@ -13,6 +13,8 @@ export class AppleTVAccessory {
   private powerStateService: Service;
   private genericServices: { [property: string]: { [value: string]: Service } } = {};
 
+  private cachedPowerState = false;
+
   constructor(
     private readonly platform: AppleTVPlatform,
     private readonly accessory: PlatformAccessory,
@@ -34,12 +36,14 @@ export class AppleTVAccessory {
         .setCharacteristic(this.platform.Characteristic.Name, 'Power State');
     this.services.push(this.powerStateService);
     this.powerStateService.getCharacteristic(this.platform.Characteristic.On)
-      .onSet(this.setOn.bind(this));
+      .onSet(this.setOn.bind(this))
+      .onGet(this.getCachedPowerState.bind(this));
     this.atv.on('update:powerState', (event: NodePyATVDeviceEvent | Error) => {
       if (event instanceof Error) {
         return;
       }
       this.powerStateService.getCharacteristic(this.platform.Characteristic.On).updateValue(event.newValue === NodePyATVPowerState.on);
+      this.cachedPowerState = event.newValue === NodePyATVPowerState.on;
     });
 
     if (!this.accessory.context.device.generic_sensors) {
@@ -93,7 +97,20 @@ export class AppleTVAccessory {
    * Handle "SET" requests from HomeKit
    */
   async setOn(value: CharacteristicValue) {
-    value ? await this.atv.turnOn() : await this.atv.turnOff();
+    if (value) {
+      await this.atv.turnOn();
+      this.cachedPowerState = true;
+      this.platform.log.info('Set cachedPowerState: true');
+    } else {
+      await this.atv.turnOff();
+      this.cachedPowerState = false;
+      this.platform.log.info('Set cachedPowerState: false');
+    }
+  }
+
+  getCachedPowerState(): boolean {
+    this.platform.log.info('Retrieved cachedPowerState: ' + this.cachedPowerState);
+    return this.cachedPowerState;
   }
 
 }
