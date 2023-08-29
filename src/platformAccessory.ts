@@ -109,7 +109,7 @@ export class AppleTVAccessory {
   }
 
   getCachedPowerState(): boolean {
-    this.platform.log.info('Retrieved cachedPowerState: ' + this.cachedPowerState);
+    this.platform.log.debug('Retrieved cachedPowerState: ' + this.cachedPowerState);
     return this.cachedPowerState;
   }
 
