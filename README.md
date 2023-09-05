@@ -29,7 +29,8 @@ Configuration can be done using [Homebridge Config UI X](https://github.com/oznu
         {
             "name": "Living Room",
             "host": "192.168.0.36",
-            "credentials": "...",
+            "airplayCredentials": "...",
+            "companionCredentials": "...",
             "device_state_sensors": [
                 "idle",
                 "paused",
